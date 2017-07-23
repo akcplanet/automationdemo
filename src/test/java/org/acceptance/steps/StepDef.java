@@ -38,7 +38,7 @@ public class StepDef {
 	public void boston_s_temperature_is_more_than(int arg) {
 		driver.get("https://weather.com/weather/today/l/USMA0046:1:US");
 		driver.findElement(By.linkText("Weekend")).click();
-		assert (arg > 55) ? true : false;
+		assert (arg > 55) ? false : true;
 		// Assert.assertTrue(false);
 	}
 
@@ -47,7 +47,7 @@ public class StepDef {
 		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
 		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
 		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	@Given("^: It's any day$")
@@ -64,13 +64,12 @@ public class StepDef {
 		searchBox1 = driver.findElement(By.name("search"));
 		searchBox1.sendKeys("Boston, MA");
 		Assert.assertTrue(true);
-		Assert.assertTrue(true);
 	}
 
 	@Then("^: Go grab them!$")
 	public void go_grab_them() {
 		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
-		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
+	//	driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
 		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
 		Assert.assertTrue(true);
 	}
