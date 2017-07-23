@@ -1,65 +1,83 @@
 package org.acceptance.steps;
 
-import static org.junit.Assert.assertTrue;
+import java.util.concurrent.TimeUnit;
 
-import java.lang.reflect.InvocationTargetException;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import org.acceptance.utils.CustomerUtils;
-import org.acceptance.utils.VerificationHandler;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
-
-@ContextConfiguration({ "classpath*:autocucumber.xml" })
 public class StepDef {
+	private WebDriver driver;
+	private WebElement searchBox;
+	private WebElement searchBox1;
 
-	private static final Logger LOGGER = Logger.getLogger(StepDef.class.getName());
-	public static final String genId = CustomerUtils.generatedId();
-
-	@Autowired
-	private VerificationHandler verificationhandler;
-	
-	@Given("^Pre Delete the record$")
-	public void pre_Delete_the_record() {
-		LOGGER.debug("ID generated :"+ genId);
-		try {
-			verificationhandler.deleteData(genId);
-		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			e.printStackTrace();
-		}
+	@Given("^: It's a weekend$")
+	public void it_s_a_weekend() {
+		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("http://www.google.com/xhtml");
+		searchBox = driver.findElement(By.name("q"));
+		searchBox.sendKeys("https://weather.com/");
+		searchBox.submit();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.findElement(By.xpath("(//h3[@class='r']/a)[1]")).click();
+		searchBox1 = driver.findElement(By.name("search"));
+		searchBox1.sendKeys("Boston, MA");
+		Assert.assertTrue(true);
 	}
 
-	@Given("^Process the Transaction$")
-	public void insert_the_record() {
-		try {
-			verificationhandler.insertData(genId);
-		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			e.printStackTrace();
-		}
+	@When("^: Boston's temperature is more than (\\d+)$")
+	public void boston_s_temperature_is_more_than(int arg) {
+		driver.get("https://weather.com/weather/today/l/USMA0046:1:US");
+		driver.findElement(By.linkText("Weekend")).click();
+		assert (arg > 55) ? true : false;
+		// Assert.assertTrue(false);
 	}
 
-	@Then("^Perform Validation$")
-	public void perform_validation()  {
-		try {
-			verificationhandler.verification(genId);
-		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			e.printStackTrace();
-		}
+	@Then("^: Lets go to beach\\.$")
+	public void lets_go_to_beach() {
+		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
+		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
+		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
+		Assert.assertTrue(true);
 	}
 
-	@Then("^Post Delete the record$")
-	public void post_Delete_the_record() {
-		try {
-			verificationhandler.deleteData(genId);
-		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			e.printStackTrace();
-		}
+	@Given("^: It's any day$")
+	public void it_s_any_day() {
+		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("http://www.google.com/xhtml");
+		searchBox = driver.findElement(By.name("q"));
+		searchBox.sendKeys("https://weather.com/");
+		searchBox.submit();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.findElement(By.xpath("(//h3[@class='r']/a)[1]")).click();
+		searchBox1 = driver.findElement(By.name("search"));
+		searchBox1.sendKeys("Boston, MA");
+		Assert.assertTrue(true);
+		Assert.assertTrue(true);
 	}
-	
 
+	@Then("^: Go grab them!$")
+	public void go_grab_them() {
+		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
+		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
+		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
+		Assert.assertTrue(true);
+	}
+
+	@After
+	public void after() {
+		driver.quit();
+	}
 
 }

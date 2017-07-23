@@ -1,8 +1,11 @@
-Feature: Automation Demo for API Testing
+Feature: Summer Time 
 
-@test @stage 
-Scenario: Common API Data Verifcation 
-	Given Pre Delete the record 
-	When Process the Transaction 
-	Then Perform Validation 
-	And Post Delete the record
+Scenario: Is Beach Day? 
+	Given : It's a weekend 
+	When : Boston's temperature is more than 80 
+	Then : Lets go to beach. 
+	
+Scenario: Ice Cream Time? 
+	Given : It's any day 
+	When : Boston's temperature is more than 55 
+	Then : Go grab them!
