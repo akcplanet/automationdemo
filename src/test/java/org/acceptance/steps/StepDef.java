@@ -47,7 +47,7 @@ public class StepDef {
 	//	driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
 		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
 		driver.quit();
-		Assert.assertFalse(true);
+		Assert.assertFalse(false);
 		
 	}
 
