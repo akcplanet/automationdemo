@@ -39,7 +39,6 @@ public class StepDef {
 		driver.get("https://weather.com/weather/today/l/USMA0046:1:US");
 		driver.findElement(By.linkText("Weekend")).click();
 		assert (arg > 55) ? false : true;
-		// Assert.assertTrue(false);
 	}
 
 	@Then("^: Lets go to beach\\.$")
@@ -47,7 +46,8 @@ public class StepDef {
 		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
 		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
 		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
-		Assert.assertTrue(false);
+		Assert.assertFalse(true);
+		driver.quit();
 	}
 
 	@Given("^: It's any day$")
@@ -71,12 +71,9 @@ public class StepDef {
 		driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
 	//	driver.findElement(By.xpath("//*[@id=\"twc-scrollable\"]/div[3]/article/div/div/div[1]/section/header/h3")).click();
 		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
+		driver.quit();
 		Assert.assertTrue(true);
 	}
 
-	@After
-	public void after() {
-		driver.quit();
-	}
 
 }
